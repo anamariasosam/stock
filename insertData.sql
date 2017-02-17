@@ -1,6 +1,6 @@
 /*
-SQLyog Community v12.4.0 (64 bit)
-MySQL - 5.7.14 : Database - udem_inventario
+SQLyog Community v12.2.5 (64 bit)
+MySQL - 5.5.24-log : Database - udem_inventario
 *********************************************************************
 */
 
@@ -17,51 +17,50 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`udem_inventario` /*!40100 DEFAULT CHARA
 
 USE `udem_inventario`;
 
-/*Data for the table `entradas` */
-
 insert  into `entradas`(`id`,`feentrada`,`persona_id`) values
 
-(1,'2017-02-10 06:50:54',4),
+(5,'2016-08-25 10:57:37',3),
 
-(2,'2017-02-10 06:52:18',2);
+(6,'2016-08-26 10:57:50',3),
 
-/*Data for the table `entradas_productos` */
+(7,'2016-08-27 11:00:05',3);
 
-insert  into `entradas_productos`(`id`,`nmcantidad`,`entrada_id`,`producto_id`,`nmcantidad_disponible`,`nmvalor_unitario`) values
+insert  into `entradas_productos`(`id`,`nmcantidad`,`entrada_id`,`producto_id`,`psvalor_unitario`,`nmcantidad_disponible`) values
 
-(1,20,1,2,20,500.00),
+(7,20,5,3,'50000.00',20),
 
-(2,5,1,3,5,3000.00),
+(8,20,5,4,'30000.00',20),
 
-(3,20,2,2,20,550.00);
+(10,20,5,5,'1000.00',20),
 
-/*Data for the table `personas` */
+(11,10,6,3,'55000.00',10),
+
+(12,10,6,4,'25000.00',10),
+
+(13,10,6,5,'1000.00',10),
+
+(14,20,7,3,'50000.00',20),
+
+(15,20,7,4,'30000.00',20),
+
+(16,30,7,6,'60000.00',30);
+
 
 insert  into `personas`(`id`,`name`,`direccion`) values
 
-(1,'Casimiro','c1'),
+(3,'Hugo',NULL),
 
-(2,'Romulo','c2'),
+(4,'Paco',NULL),
 
-(3,'Bonifacio','c3'),
+(5,'Luis',NULL);
 
-(4,'Rapunsel','c4');
 
-/*Data for the table `productos` */
+insert  into `productos`(`id`,`name`,`nmcantidad`,`pssuma_total_valores`,`nmsuma_total_productos`,`psventa`) values 
 
-insert  into `productos`(`id`,`name`,`nmcantidad_disponible`,`nmsuma_cantidad_total`,`nmsuma_valor_total`) values
+(3,'Vino',50,'2550000.00',50,'66000.00'),
 
-(1,'C Terapeutico',0,0,0.00),
+(4,'Queso',50,'1200000.00',50,'36000.00'),
 
-(2,'Fresas',40,40,21000.00),
+(5,'Aceituna',30,'30000.00',30,'1200.00'),
 
-(3,'Brownis',5,5,15000.00);
-
-/*Data for the table `productos_salidas` */
-
-/*Data for the table `salidas` */
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+(6,'Jamon',30,'1800000.00',30,'72000.00');
