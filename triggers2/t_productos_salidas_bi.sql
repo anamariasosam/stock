@@ -45,29 +45,29 @@ BEGIN
 	SET v_nmcantidad_producto = (SELECT nmcantidad from productos where id = new.producto_id);
 
   -- Seleccion la cantidad minima del producto elegido
-	SET v_preorden = (select preorden from productos where id = new.producto_id);
+	SET v_nmcantidad_minima = (select nmcantidad_minima from productos where id = new.producto_id);
 
 
   -- TO DO : preguntar como queda la base de datos
 
   -- trae el id del provedor del producto que se va a hacer la venta
-	SET v_proveedor_id = (select personas_id from productos where id = new.producto_id);
+	SET v_proveedor_id = (select persona_id from productos where id = new.producto_id);
 
-  -- Verifica si del producto que se va a hacer la compra todavia no llega al limite de preorden
-	if v_nmcantidad_producto < v_preorden then
+  -- Verifica si del producto que se va a hacer la compra todavia no llega al limite de nmcantidad_minima
+	if v_nmcantidad_producto < v_nmcantidad_minima then
 
-    -- la cantidad que se va pedir es menor que el limite de preorden, verificar si ese producto
+    -- la cantidad que se va pedir es menor que el limite de nmcantidad_minima, verificar si ese producto
     -- hecho algun pedido alguna vez
 		SET v_insert_plan = (SELECT producto_id FROM plan_de_compra WHERE producto_id = new.producto_id);
 
     -- nunca se ha hecho un plan de compra de ese articulo se añade a la lista con los ids
 		if v_insert_plan IS NULL then
-			insert into plan_de_compra (producto_id, personas_id) values(new.producto_id, v_proveedor_id);
-		elseif (v_proveedor_id <> (SELECT personas_id from plan_de_compra where id = new.producto_id)) then
+			insert into plan_de_compra (producto_id, persona_id) values(new.producto_id, v_proveedor_id);
+		elseif (v_proveedor_id <> (SELECT persona_id from plan_de_compra where id = new.producto_id)) then
     -- el id del provedor de la compra que se va a hacer es diferente del que ya habia,
     -- entonces actualize el id del proveedor
       update plan_de_compra
-				set personas_id = v_proveedor_id
+				set persona_id = v_proveedor_id
 				where producto_id = new.producto_id;
 		end if;
 	end if;
